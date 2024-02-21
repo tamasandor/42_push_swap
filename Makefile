@@ -9,13 +9,13 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	Make -C ./printf
-	cp printf/libprintf.a $(NAME)
+	Make -C ./include/printf
+	cp ./include/printf/libprintf.a $(NAME)
 	$(AR) $(NAME) $(OBJ)
 
 clean:
-	Make -C clean ./libft
-	Make -C clean ./printf
+	Make -C ./include/libft clean
+	Make -C ./include/printf clean
 	rm -f $(OBJ)
 
 fclean: clean
