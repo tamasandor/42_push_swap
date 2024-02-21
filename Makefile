@@ -10,7 +10,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	Make -C ./include/printf
-	cp ./include/printf/libprintf.a $(NAME)
+	cp ./include/printf/libftprintf.a $(NAME)
 	$(AR) $(NAME) $(OBJ)
 
 clean:
