@@ -19,6 +19,8 @@ clean:
 	rm -f $(OBJ)
 
 fclean: clean
+	Make -C ./include/libft fclean
+	Make -C ./include/printf fclean
 	rm -f $(NAME)
 
 re: fclean all
