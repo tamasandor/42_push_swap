@@ -10,13 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include <stdio.h>
 #include <stdlib.h>
-// check for the bigger number than integer
-// in this case the program should exit
+#include <limits.h>
 
-void ft_error(void)
+void	ft_error(void)
 {
 	printf("Error\n"); // TODO: change it to ft_printf
 	exit(0);
@@ -25,28 +23,26 @@ void ft_error(void)
 // atoi with checker
 int	ft_atoi(char *str)
 {
-	int	num;
-	int	minus;
+	int			minus;
+	long int	res;
 
-	num = 0;
+	res = 0;
 	minus = 1;
 	if (*str == '-')
 	{
 		str++;
 		minus = -1;
 	}
-	while(*str && (*str >= '0' && *str <= '9'))
+	while (*str && (*str >= '0' && *str <= '9'))
 	{
-		// TODO: Overflow protection
-			// if ((num * 10 / 2147483647 + (*str - '0')) > 0 && minus == 1)
-			// 	ft_error();
-			// else if (((num * 10 + (*str - '0')) / 2147483648) >= 1 && minus == -1)
-			// 	ft_error();
-			num = num * 10 + (*str++ - '0');
+		if ((minus == -1 && ((res * 10 + (*str - '0')) * -1) < INT_MIN)
+			|| res * 10 + (*str - '0') > INT_MAX)
+			ft_error();
+		res = res * 10 + (*str++ - '0');
 	}
 	if (*str != '\0')
 		ft_error();
-	return (num * minus);
+	return ((int)(res * minus));
 }
 
 int	main(int argc, char *argv[])
