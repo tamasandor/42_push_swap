@@ -6,39 +6,33 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:23:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/02/24 21:26:08 by atamas           ###   ########.fr       */
+/*   Updated: 2024/02/25 17:43:53 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <limits.h>
 
 void	ft_error(void)
 {
-	printf("Error\n"); // TODO: change it to ft_printf
-	exit(1);
-}
-
-void	ft_error1(void)
-{
-	printf("Error1\n"); // TODO: change it to ft_printf
+	write(2, "Error\n", 6);
 	exit(1);
 }
 
 // TODO: Move it to folder include
-int	ft_strcmp(char *s1, char *s2)
+int	ft_same(char *s1, char *s2)
 {
 	while (*s1 != '\0' && *s2 != '\0')
 	{
 		if (*s1 != *s2)
-			return (1);
+			return (0);
 		s1++;
 		s2++;
 	}
 	if (*s1 == '\0' && *s2 == '\0')
-		return (0);
-	return (1);
+		return (1);
+	return (0);
 }
 
 // atoi with checker
@@ -49,7 +43,7 @@ int	ft_atoi(char *str)
 
 	res = 0;
 	minus = 1;
-	if (!ft_strcmp("-2147483648", str))
+	if (ft_same("-2147483648", str))
 		return (-2147483648);
 	if (*str == '-')
 	{
@@ -60,7 +54,7 @@ int	ft_atoi(char *str)
 	{
 		if ((minus == -1 && ((res * 10 + (*str - '0')) * -1) < INT_MIN)
 			|| res * 10 + (*str - '0') > INT_MAX)
-				ft_error();
+			ft_error();
 		res = res * 10 + (*str++ - '0');
 	}
 	if (*str != '\0')
@@ -68,27 +62,24 @@ int	ft_atoi(char *str)
 	return (res * minus);
 }
 
-/* int	error_free(int argc, char *argv[])
+int	error_free(int argc, char *argv[])
 {
 	int	i;
 	int	j;
 
 	i = 1;
 	j = 1;
-	while (i <= argc)
+	while (i < argc)
 	{
 		ft_atoi(argv[i]);
 		j = 1;
 		while (j < i)
 		{
+			if (ft_same(argv[i], argv[j]))
+				ft_error();
 			j++;
-			printf("%s - %s\n", argv[i], argv[j]);
-			if (!ft_strcmp(argv[i], argv[j]))
-				ft_error1();
 		}
 		i++;
-		// check until the i position if something is the same as this
-		// than its an error, call ft_error
 	}
 	return (1);
 }
@@ -104,8 +95,6 @@ int	main(int argc, char *argv[])
 	}
 	else if (error_free(argc, argv))
 	{
-		printf("NO ERROR");
+		write(1, "NoError\n", 8);
 	}
-	int	num = ft_atoi(argv[argc - 1]);
-	printf("%d\n", num);
-} */
+}
