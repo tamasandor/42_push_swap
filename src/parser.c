@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:23:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/02/25 17:43:53 by atamas           ###   ########.fr       */
+/*   Updated: 2024/02/29 04:26:12 by test             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include <limits.h>
+#include "../include/libft/libft.h"
 
 void	ft_error(void)
 {
@@ -36,7 +37,7 @@ int	ft_same(char *s1, char *s2)
 }
 
 // atoi with checker
-int	ft_atoi(char *str)
+int	ft_atoi_check(char *str)
 {
 	int			minus;
 	long		res;
@@ -71,7 +72,7 @@ int	error_free(int argc, char *argv[])
 	j = 1;
 	while (i < argc)
 	{
-		ft_atoi(argv[i]);
+		ft_atoi_check(argv[i]);
 		j = 1;
 		while (j < i)
 		{
@@ -91,9 +92,9 @@ int	main(int argc, char *argv[])
 	else if (argc == 2)
 	{
 		// TODO: ft_split
-		// ft_split();
+		ft_split(argv[1], ' ', argc);
 	}
-	else if (error_free(argc, argv))
+	if (error_free(argc, argv))
 	{
 		write(1, "NoError\n", 8);
 	}

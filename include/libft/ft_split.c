@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 11:24:18 by atamas            #+#    #+#             */
-/*   Updated: 2023/12/03 19:05:33 by atamas           ###   ########.fr       */
+/*   Updated: 2024/02/29 04:21:59 by test             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	word_length(const char *string, char delimiter)
 	return (length);
 }
 
-char	**ft_split(char const *string, char delimiter)
+char	**ft_split(char const *string, char delimiter, int *argc)
 {
 	char	**memory;
 	int		mem_i;
@@ -72,7 +72,8 @@ char	**ft_split(char const *string, char delimiter)
 
 	mem_i = 0;
 	length = 0;
-	memory = malloc(sizeof(char *) * (word_counter(string, delimiter) + 1));
+	*argc = word_counter(string, delimiter);
+	memory = malloc(sizeof(char *) * (*argc + 1));
 	if (!memory)
 		return (NULL);
 	while (*string != '\0')
