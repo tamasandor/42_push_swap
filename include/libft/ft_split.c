@@ -64,7 +64,7 @@ static int	word_length(const char *string, char delimiter)
 	return (length);
 }
 
-char	**ft_split(char const *string, char delimiter, int *argc)
+char	**ft_split(char const *string, char delimiter)
 {
 	char	**memory;
 	int		mem_i;
@@ -72,8 +72,7 @@ char	**ft_split(char const *string, char delimiter, int *argc)
 
 	mem_i = 0;
 	length = 0;
-	*argc = word_counter(string, delimiter);
-	memory = malloc(sizeof(char *) * (*argc + 1));
+	memory = malloc(sizeof(char *) * (word_counter(string, delimiter) + 1));
 	if (!memory)
 		return (NULL);
 	while (*string != '\0')

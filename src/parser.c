@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: atamas <atamas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:23:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/02/29 04:26:12 by test             ###   ########.fr       */
+/*   Updated: 2024/03/01 17:22:09 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <limits.h>
 #include "../include/libft/libft.h"
+#include "../testing.h"
 
 void	ft_error(void)
 {
@@ -68,16 +70,15 @@ int	error_free(int argc, char *argv[])
 	int	i;
 	int	j;
 
-	i = 1;
-	j = 1;
-	while (i < argc)
+	i = 0;
+	while (i < argc) // i < 3
 	{
 		ft_atoi_check(argv[i]);
-		j = 1;
+		j = 0;
 		while (j < i)
 		{
 			if (ft_same(argv[i], argv[j]))
-				ft_error();
+				return (0);
 			j++;
 		}
 		i++;
@@ -91,11 +92,22 @@ int	main(int argc, char *argv[])
 		ft_error();
 	else if (argc == 2)
 	{
-		// TODO: ft_split
-		ft_split(argv[1], ' ', argc);
+		argv = ft_split(argv[1], ' ');
+		argc = memory_len(argv);
+		printf("mem len: %d\n", argc);
+		// memory len
+		if (error_free(argc, argv) == 0)
+			return (free_the_memory(argv), write(2, "Error\n", 6));
+		free_the_memory(argv);
 	}
-	if (error_free(argc, argv))
+	else if (argc > 2)
 	{
+		if (error_free(argc - 1, ++argv) == 0)
+			return (write(2, "Error\n", 6));
 		write(1, "NoError\n", 8);
 	}
+	printf("Argv: ");
+	for (int i = 0; argv[i]; i++)
+		printf("%s ", argv[i]);
+	printf("\n");
 }
