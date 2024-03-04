@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atamas <atamas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: atamas <atamas@stundent.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:23:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/01 17:22:09 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/04 12:02:38 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,8 @@ int	main(int argc, char *argv[])
 	{
 		argv = ft_split(argv[1], ' ');
 		argc = memory_len(argv);
-		printf("mem len: %d\n", argc);
-		// memory len
 		if (error_free(argc, argv) == 0)
 			return (free_the_memory(argv), write(2, "Error\n", 6));
-		free_the_memory(argv);
 	}
 	else if (argc > 2)
 	{
