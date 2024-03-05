@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@stundent.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:23:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/05 19:23:14 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/05 19:27:08 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_same(char *s1, char *s2)
 }
 
 // atoi with checker
-int	ft_atoi_check(char *str)
+int	ft_atoi_check(char *str) // add a pointer and change that
 {
 	int			minus;
 	long		res;
