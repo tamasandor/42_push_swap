@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@stundent.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:23:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/04 12:02:38 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/05 19:23:14 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	ft_atoi_check(char *str)
 			ft_error();
 		res = res * 10 + (*str++ - '0');
 	}
-	if (*str != '\0')
+	if (*str != '\0' || (res == 0 && minus == -1))
 		ft_error();
 	return (res * minus);
 }
@@ -94,7 +94,7 @@ int	main(int argc, char *argv[])
 	{
 		argv = ft_split(argv[1], ' ');
 		argc = memory_len(argv);
-		if (error_free(argc, argv) == 0)
+		if (error_free(argc, argv) == 0 || argv == NULL)
 			return (free_the_memory(argv), write(2, "Error\n", 6));
 	}
 	else if (argc > 2)
