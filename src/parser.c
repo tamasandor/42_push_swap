@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:23:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/06 16:11:56 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/06 20:39:12 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,6 @@
 #include "../include/libft/libft.h"
 #include "../testing.h"
 
-void	ft_error(void)
-{
-	write(2, "Error\n", 6);
-	exit(1);
-}
-
-// TODO: Move it to folder include
 int	ft_same(char *s1, char *s2)
 {
 	while (*s1 != '\0' && *s2 != '\0')
@@ -39,7 +32,6 @@ int	ft_same(char *s1, char *s2)
 	return (0);
 }
 
-// atoi with checker
 int	ft_atoi_check(char *str, int *error)
 {
 	int			minus;
@@ -47,6 +39,8 @@ int	ft_atoi_check(char *str, int *error)
 
 	res = 0;
 	minus = 1;
+	if (!str || !str[0])
+		return (*error = 1, 0);
 	if (ft_same("-2147483648", str))
 		return (-2147483648);
 	if (*str == '-')
@@ -66,7 +60,7 @@ int	ft_atoi_check(char *str, int *error)
 	return (res * minus);
 }
 
-int	error_free(int argc, char *argv[], t_stack *stack_a, t_stack *stack_b)
+int	error_free(int argc, char **memory)
 {
 	int	i;
 	int	j;
@@ -74,13 +68,15 @@ int	error_free(int argc, char *argv[], t_stack *stack_a, t_stack *stack_b)
 
 	i = 0;
 	error = 0;
-	while (i < argc && error == 0) // i < 3
+	if (memory == NULL)
+		error = 1;
+	while (i < argc && error == 0)
 	{
-		ft_atoi_check(argv[i], &error);
+		ft_atoi_check(memory[i], &error);
 		j = 0;
 		while (j < i && error == 0)
 		{
-			if (ft_same(argv[i], argv[j]))
+			if (ft_same(memory[i], memory[j]))
 				error = 1;
 			j++;
 		}
@@ -88,10 +84,36 @@ int	error_free(int argc, char *argv[], t_stack *stack_a, t_stack *stack_b)
 	}
 	if (error == 1)
 	{
-		write(2, "Error/n", 6);
+		write(2, "Error\n", 6);
 		return (0);
 	}
 	return (1);
+}
+
+void	ft_parse(int argc, char *argv[], t_stack *stack_a, t_stack *stack_b)
+{
+	if (argc == 2)
+	{
+		if (argv[1][0] == '\0' || argv[1][0] == ' ')
+		{
+			write(2, "Error\n", 6);
+			exit(1);
+		}
+		argv = ft_split(argv[1], ' ');
+		argc = memory_len(argv);
+		if (error_free(argc, argv) == 0)
+		{
+			free_the_memory(argv);
+			exit(1);
+		}
+	}
+	else
+	{
+		if (error_free(--argc, ++argv) == 0)
+			exit(1);
+	}
+	if (stack_a && stack_b)
+	{}
 }
 
 int	main(int argc, char *argv[])
@@ -101,8 +123,8 @@ int	main(int argc, char *argv[])
 
 	stack_a = NULL;
 	stack_b = NULL;
-	if (argc >= 2 && error_free(argc, argv, &stack_a, &stack_b))
-		ft_parse();
+	if (argc >= 2)
+		ft_parse(argc, argv, stack_a, stack_b);
 	else
 		return (0);
 }

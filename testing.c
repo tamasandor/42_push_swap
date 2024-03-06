@@ -20,6 +20,8 @@ int	memory_len(char **memory)
 	int	i;
 
 	i = 0;
+	if (!memory)
+		return (0);
 	while (memory[i])
 		i++;
 	return (i);
