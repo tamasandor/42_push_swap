@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:23:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/12 01:23:21 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/12 14:23:57 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@
 #include <limits.h>
 #include "../include/push_swap.h"
 #include "../include/libft/libft.h"
-#include "../testing.h"
 
 int	ft_same(char *s1, char *s2)
 {
+	if (*s1 == '+')
+		s1++;
+	if (*s2 == '+')
+		s2++;
 	while (*s1 != '\0' && *s2 != '\0')
 	{
 		if (*s1 != *s2)
@@ -54,10 +57,10 @@ int	ft_atoi_check(char *str, int *error)
 		return (*error = 1, 0);
 	if (ft_same("-2147483648", str))
 		return (-2147483648);
-	if (*str == '-')
+	if (*str == '-' || *str == '+')
 	{
-		str++;
-		minus = -1;
+		if (*str++ == '-')
+			minus = -1;
 	}
 	while (*str && (*str >= '0' && *str <= '9') && *error == 0)
 	{
@@ -94,10 +97,7 @@ int	error_free(int argc, char **memory)
 		i++;
 	}
 	if (error == 1)
-	{
-		write(2, "Error\n", 6);
-		return (0);
-	}
+		return (write(2, "Error\n", 6), 0);
 	return (1);
 }
 
@@ -112,21 +112,19 @@ void	ft_parse(int argc, char *argv[], t_stack **stack_a)
 		}
 		argv = ft_split(argv[1], ' ');
 		argc = memory_len(argv);
-		if (error_free(argc, argv) == 0)
+		if (!error_free(argc, argv) || !create_stack(stack_a, argv))
 		{
 			free_the_memory(argv);
 			exit(1);
 		}
-		create_stack(stack_a, argv);
 		print_stack(*stack_a);
 		free_the_memory(argv);
 		free_stack(stack_a);
 	}
 	else
 	{
-		if (error_free(--argc, ++argv) == 0)
+		if (!error_free(--argc, ++argv) || !create_stack(stack_a, argv))
 			exit(1);
-		create_stack(stack_a, argv);
 		print_stack(*stack_a);
 		free_stack(stack_a);
 	}

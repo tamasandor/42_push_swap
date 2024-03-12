@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 01:10:49 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/12 01:12:03 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/12 13:27:44 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,24 @@ void	free_stack(t_stack **head)
 	}
 }
 
-void	create_stack(t_stack **head, char **data)
+/* 
+Creates the stack from the memory
+Returns 0 on error
+*/
+int	create_stack(t_stack **head, char **data)
 {
 	t_stack	*temp;
 	t_stack	*last;
+	int		error;
 
 	temp = NULL;
+	error = 0;
 	while (*data)
 	{
 		temp = malloc(sizeof(t_stack));
-		if (!temp)
-			free_stack(head);
-		temp->number = atoi(*data++);
+		if (!temp || error == 1)
+			return (free_stack(head), 0);
+		temp->number = ft_atoi_check(*data++, &error);
 		temp->next = NULL;
 		if (*head)
 			last->next = temp;
@@ -48,6 +54,7 @@ void	create_stack(t_stack **head, char **data)
 			*head = temp;
 		last = temp;
 	}
+	return (1);
 }
 
 void	print_stack(t_stack *stack)
