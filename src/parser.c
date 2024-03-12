@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:23:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/10 19:39:17 by test             ###   ########.fr       */
+/*   Updated: 2024/03/12 01:23:21 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	error_free(int argc, char **memory)
 	return (1);
 }
 
-void	ft_parse(int argc, char *argv[], t_stack *stack_a, t_stack *stack_b)
+void	ft_parse(int argc, char *argv[], t_stack **stack_a)
 {
 	if (argc == 2)
 	{
@@ -117,25 +117,28 @@ void	ft_parse(int argc, char *argv[], t_stack *stack_a, t_stack *stack_b)
 			free_the_memory(argv);
 			exit(1);
 		}
+		create_stack(stack_a, argv);
+		print_stack(*stack_a);
+		free_the_memory(argv);
+		free_stack(stack_a);
 	}
 	else
 	{
 		if (error_free(--argc, ++argv) == 0)
 			exit(1);
+		create_stack(stack_a, argv);
+		print_stack(*stack_a);
+		free_stack(stack_a);
 	}
-	if (stack_a && stack_b)
-	{}
 }
 
 int	main(int argc, char *argv[])
 {
 	t_stack	*stack_a;
-	t_stack	*stack_b;
 
 	stack_a = NULL;
-	stack_b = NULL;
 	if (argc >= 2)
-		ft_parse(argc, argv, stack_a, stack_b);
+		ft_parse(argc, argv, &stack_a);
 	else
 		return (0);
 }
