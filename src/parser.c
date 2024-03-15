@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: atamas <atamas@stundent.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:23:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/12 14:23:57 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/15 15:54:45 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,26 +117,31 @@ void	ft_parse(int argc, char *argv[], t_stack **stack_a)
 			free_the_memory(argv);
 			exit(1);
 		}
-		print_stack(*stack_a);
 		free_the_memory(argv);
-		free_stack(stack_a);
 	}
 	else
 	{
 		if (!error_free(--argc, ++argv) || !create_stack(stack_a, argv))
 			exit(1);
-		print_stack(*stack_a);
-		free_stack(stack_a);
 	}
 }
 
 int	main(int argc, char *argv[])
 {
 	t_stack	*stack_a;
+	t_stack	*stack_b;
 
 	stack_a = NULL;
+	stack_b = NULL;
 	if (argc >= 2)
 		ft_parse(argc, argv, &stack_a);
 	else
 		return (0);
+	printf("stack_a: ");
+	print_stack(stack_a);
+	swap_x(&stack_a, "sa\n");
+	printf("stack_a after: ");
+	print_stack(stack_a);
+	free_stack(&stack_a);
+	free_stack(&stack_b);
 }
