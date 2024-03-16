@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:34:13 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/15 23:51:17 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/16 15:47:13 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ void	rotate_x(t_stack **stack, char *txt)
 	}
 }
 
-void	reverse_rotate_x(t_stack **stack)
+void	reverse_rotate_x(t_stack **stack, char *txt)
 {
 	t_stack	*second_to_last;
 	t_stack	*last_node;
-	
+
 	last_node = *stack;
 	if (last_node && last_node->next)
 	{
@@ -83,5 +83,33 @@ void	reverse_rotate_x(t_stack **stack)
 			second_to_last->next = NULL;
 		last_node->next = *stack;
 		*stack = last_node;
+		if (txt)
+			write(1, txt, 4);
+	}
+}
+
+/* 
+multiple_operation function handles the operations when you have to do multiple
+operations
+1: ss = swap a and swap b
+2: rr = rotate a and rotate b
+3: rrr = reverse rotate a and reverse rotate b
+ */
+void	multiple_operation(t_stack **stack_a, t_stack **stack_b, int op)
+{
+	if (op == 1)
+	{
+		swap_x(stack_a, NULL);
+		swap_x(stack_b, "ss\n");
+	}
+	else if (op == 2)
+	{
+		rotate_x(stack_a, NULL);
+		rotate_x(stack_b, "rr\n");
+	}
+	else if (op == 3)
+	{
+		reverse_rotate_x(stack_a, NULL);
+		reverse_rotate_x(stack_b, "rrr\n");
 	}
 }

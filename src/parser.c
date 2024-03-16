@@ -6,13 +6,12 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:23:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/15 23:54:42 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/16 16:35:56 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include <limits.h>
 #include "../include/push_swap.h"
 #include "../include/libft/libft.h"
@@ -137,8 +136,15 @@ int	main(int argc, char *argv[])
 		ft_parse(argc, argv, &stack_a);
 	else
 		return (0);
-	printf("stack_a: \n");
-	print_stack(stack_a);
+	write(1, "stack_a: ", 10);
+	print_stack(&stack_a);
+	push_to_x(&stack_a, &stack_b, "pb\n");
+	push_to_x(&stack_a, &stack_b, "pb\n");
+	push_to_x(&stack_a, &stack_b, "pb\n");
+	write(1, "stack_a: ", 10);
+	print_stack(&stack_a);
+	write(1, "stack_b: ", 10);
+	print_stack(&stack_b);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 }

@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 01:10:49 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/12 13:27:44 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/16 16:11:24 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,16 @@ int	create_stack(t_stack **head, char **data)
 	return (1);
 }
 
-void	print_stack(t_stack *stack)
+void	print_stack(t_stack **stack)
 {
+	t_stack	*temp;
+
+	temp = *stack;
 	printf("{");
-	while (stack)
+	while (temp)
 	{
-		printf(" %d ", stack->number);
-		stack = stack->next;
+		printf(" %d ", temp->number);
+		temp = temp->next;
 	}
-	printf("}");
+	printf("}\n");
 }
