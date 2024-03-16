@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:08:44 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/16 15:53:24 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/16 17:01:26 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 typedef struct s_stack
 {
+	int				index;
 	int				number;
 	struct	s_stack	*next;
 }	t_stack;
