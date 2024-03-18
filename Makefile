@@ -2,8 +2,7 @@ NAME = push_swap
 CC = cc
 FLAGS = -Wall -Werror -Wextra
 AR = ar -rcs
-SRC = ./src/operations.c ./src/parser.c ./src/stack.c ./src/utils.c
-
+SRC = ./src/operations.c ./src/parser.c ./src/stack.c ./src/utils.c ./src/main.c ./src/pos_and_cost.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

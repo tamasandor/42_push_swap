@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 01:10:49 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/16 20:37:12 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/18 23:07:20 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	print_stack(t_stack **stack)
 	printf("{");
 	while (temp)
 	{
-		printf(" |%d I: %d| ", temp->number, temp->index);
+		printf(" |%d POS: %d| ", temp->number, temp->pos);
 		temp = temp->next;
 	}
 	printf("}\n");
