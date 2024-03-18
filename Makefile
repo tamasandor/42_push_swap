@@ -10,16 +10,16 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(MAKE) -C ./include/libft
-	cp ./include/libft/libft.a ./libft.a
+	mv ./include/libft/libft.a ./libft.a
 	$(CC) $(FLAGS) $(OBJ) libft.a -o $(NAME)
 
 clean:
 	$(MAKE) -C ./include/libft clean
-	rm -f $(OBJ)
+	rm -f $(OBJ) libft.a
 
 fclean: clean
 	$(MAKE) -C ./include/libft fclean
-	rm -f $(NAME) libft.a
+	rm -f $(NAME)
 
 re: fclean all
 
