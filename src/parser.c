@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:23:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/16 21:18:40 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/18 13:25:05 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,45 +129,4 @@ int	ft_parse(int argc, char *argv[], t_stack **stack_a)
 			exit(1);
 	}
 	return (argc);
-}
-
-void	assign_index(t_stack *stack_a, int len)
-{
-	int		index;
-	t_stack	*lowest;
-	t_stack	*current;
-
-	index = 1;
-	while (index <= len)
-	{
-		current = stack_a;
-		lowest = NULL;
-		while (current)
-		{
-			if (current->index == 0)
-				if (!lowest || current->number < lowest->number)
-					lowest = current;
-			current = current->next;
-		}
-		if (lowest)
-			lowest->index = index++;
-	}
-}
-
-int	main(int argc, char *argv[])
-{
-	t_stack	*stack_a;
-	t_stack	*stack_b;
-
-	stack_a = NULL;
-	stack_b = NULL;
-	if (argc >= 2)
-		argc = ft_parse(argc, argv, &stack_a);
-	else
-		return (0);
-	assign_index(stack_a, argc);
-	write(1, "stack_a: ", 10);
-	print_stack(&stack_a);
-	free_stack(&stack_a);
-	free_stack(&stack_b);
 }

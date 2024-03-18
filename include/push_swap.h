@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:08:44 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/16 17:01:26 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/18 13:40:42 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_stack
 {
 	int				index;
 	int				number;
-	struct	s_stack	*next;
+	struct s_stack	*next;
 }	t_stack;
 
 void	free_stack(t_stack **head);
@@ -34,6 +34,6 @@ void	swap_x(t_stack **stack, char *txt);
 void	rotate_x(t_stack **stack, char *txt);
 void	reverse_rotate_x(t_stack **stack, char *txt);
 void	multiple_operation(t_stack **stack_a, t_stack **stack_b, int op);
-
-
+void	assign_index(t_stack *stack_a, int len);
+int		ft_parse(int argc, char *argv[], t_stack **stack_a);
 #endif
