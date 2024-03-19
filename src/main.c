@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 16:52:50 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/18 23:13:07 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/19 23:08:52 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,23 @@ void	sort_three(t_stack **stack_a)
 
 void	sort_more(t_stack **stack_a, t_stack **stack_b, int len)
 {
-	int	pushed;
+	t_stack	*temp_b;
+	int		pushed;
 
 	pushed = 0;
-	while (pushed++ < len - 3)
+	temp_b = *stack_b;
+	while (pushed < len - 3)
+	{
+		pushed++;
 		push_to_x(stack_a, stack_b, "pb\n");
+	}
 	sort_three(stack_a);
-	current_pos(stack_a, stack_b);
+	while (*stack_b)
+	{
+		target(stack_a, stack_b);
+		cost(*stack_a, stack_b, len - pushed, pushed);
+		pushed -= do_cost_effective(stack_a, stack_b, len - pushed, pushed);
+	}
 }
 
 int	main(int argc, char *argv[])
@@ -93,7 +103,7 @@ int	main(int argc, char *argv[])
 	write(1, "stack_a: ", 10);
 	print_stack(&stack_a);
 	write(1, "stack_b: ", 10);
-	print_stack(&stack_b);
+	print_stack_b(&stack_b);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 }
