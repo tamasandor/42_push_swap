@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 16:52:50 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/19 23:08:52 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/22 14:13:36 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,21 +64,21 @@ void	sort_three(t_stack **stack_a)
 void	sort_more(t_stack **stack_a, t_stack **stack_b, int len)
 {
 	t_stack	*temp_b;
-	int		pushed;
+	int		len_b;
 
-	pushed = 0;
+	len_b = 0;
 	temp_b = *stack_b;
-	while (pushed < len - 3)
+	while (len_b < len - 3)
 	{
-		pushed++;
+		len_b++;
 		push_to_x(stack_a, stack_b, "pb\n");
 	}
 	sort_three(stack_a);
 	while (*stack_b)
 	{
 		target(stack_a, stack_b);
-		cost(*stack_a, stack_b, len - pushed, pushed);
-		pushed -= do_cost_effective(stack_a, stack_b, len - pushed, pushed);
+		cost(*stack_b, len - len_b, len_b);
+		len_b -= do_cost_effective(stack_a, stack_b);
 	}
 }
 

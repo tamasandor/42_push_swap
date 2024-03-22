@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 23:00:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/19 23:18:11 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/22 14:15:28 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	target(t_stack **stack_a, t_stack **stack_b)
 	}
 }
 
-void	cost(t_stack *stack_a, t_stack *stack_b, int size_a, int size_b)
+void	cost(t_stack *stack_b, int size_a, int size_b)
 {
 	t_stack	*temp_b;
 
@@ -91,7 +91,7 @@ void	cost(t_stack *stack_a, t_stack *stack_b, int size_a, int size_b)
 			temp_b->cost_b = (size_b - temp_b->pos) * -1;
 		temp_b->cost_a = temp_b->target_pos;
 		if (temp_b->target_pos > size_a / 2)
-			temp_b->cost_a = (size_a - temp_b->pos) * -1;
+			temp_b->cost_a = (size_a - temp_b->target_pos) * -1;
 		temp_b = temp_b->next;
 	}
 }
