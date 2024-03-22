@@ -22,4 +22,28 @@ fclean: clean
 
 re: fclean all
 
+test3:		$(NAME)	
+		$(eval ARG = $(shell shuf -i 0-50 -n 3))
+		./push_swap $(ARG) | ./checker_linux $(ARG)
+		@echo -n "Instructions: "
+		@./push_swap $(ARG) | wc -l
+
+test5:		$(NAME)	
+		$(eval ARG = $(shell shuf -i 0-50 -n 5))
+		./push_swap $(ARG) | ./checker_linux $(ARG)
+		@echo -n "Instructions: "
+		@./push_swap $(ARG) | wc -l
+
+test100:	$(NAME)	
+		$(eval ARG = $(shell shuf -i 0-1000 -n 100))
+		./push_swap $(ARG) | ./checker_linux $(ARG)
+		@echo -n "Instructions: "
+		@./push_swap $(ARG) | wc -l
+
+test500:	$(NAME)	
+		$(eval ARG = $(shell shuf -i 0-2000 -n 500))
+		./push_swap $(ARG) | ./checker_linux $(ARG)
+		@echo -n "Instructions: "
+		@./push_swap $(ARG) | wc -l
+
 .PHONY: all clean fclean re
