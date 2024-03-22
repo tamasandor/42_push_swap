@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 16:52:50 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/22 19:25:54 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/22 20:47:33 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,19 @@ static void	sort_three(t_stack **stack_a)
 		swap_x(stack_a, "sa\n");
 }
 
-static void	sort_more(t_stack **stack_a, t_stack **stack_b, int len)
+static void	sort_more(t_stack **stack_a, t_stack **stack_b, int len, int len_b)
 {
-	t_stack	*temp_b;
-	int		len_b;
+	int		i;
 
-	len_b = 0;
-	temp_b = *stack_b;
+	i = 0;
+	while (len > 6 && i++ < len && len_b < len / 2)
+	{
+		if ((*stack_a)->index <= len / 2 && len_b++ < len / 2)
+			push_to_x(stack_a, stack_b, "pb\n");
+		else
+			rotate_x(stack_a, "ra\n");
+		i++;
+	}
 	while (len_b < len - 3)
 	{
 		len_b++;
@@ -81,8 +87,6 @@ static void	sort_more(t_stack **stack_a, t_stack **stack_b, int len)
 		cost(*stack_b, len - len_b, len_b);
 		len_b -= do_cost_effective(stack_a, stack_b);
 	}
-	if (!is_sorted(*stack_a))
-		adjust_stack(stack_a, len);
 }
 
 int	main(int argc, char *argv[])
@@ -102,7 +106,9 @@ int	main(int argc, char *argv[])
 	else if (argc == 3 && !is_sorted(stack_a))
 		sort_three(&stack_a);
 	else if (argc > 3 && !is_sorted(stack_a))
-		sort_more(&stack_a, &stack_b, argc);
+		sort_more(&stack_a, &stack_b, argc, 0);
+	if (!is_sorted(stack_a))
+		adjust_stack(&stack_a, argc);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 }
