@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:23:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/18 13:25:05 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/22 19:27:00 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "../include/push_swap.h"
 #include "../include/libft/libft.h"
 
-int	ft_same(char *s1, char *s2)
+static int	ft_same(char *s1, char *s2)
 {
 	if (*s1 == '+')
 		s1++;
@@ -39,7 +39,7 @@ int	ft_same(char *s1, char *s2)
 	return (0);
 }
 
-int	ft_multinull(char *str)
+static int	ft_multinull(char *str)
 {
 	if (*str == '0')
 	{
@@ -78,7 +78,7 @@ int	ft_atoi_check(char *str, int *error)
 	return (res * minus);
 }
 
-int	error_free(int argc, char **memory)
+static int	error_free(int argc, char **memory)
 {
 	int	i;
 	int	j;

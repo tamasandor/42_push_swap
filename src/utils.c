@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 16:49:22 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/19 22:16:41 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/22 17:14:05 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	memory_len(char **memory)
 	return (i);
 }
 
-int	my_abs(int	num)
+int	my_abs(int num)
 {
 	if (num < 0)
 		num = -num;

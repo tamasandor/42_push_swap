@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:08:44 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/22 00:02:29 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/22 19:25:48 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	swap_x(t_stack **stack, char *txt);
 void	rotate_x(t_stack **stack, char *txt);
 void	reverse_rotate_x(t_stack **stack, char *txt);
 void	multiple_operation(t_stack **stack_a, t_stack **stack_b, int op);
-void	assign_index(t_stack *stack_a, int len);
 int		ft_parse(int argc, char *argv[], t_stack **stack_a);
 void	current_pos(t_stack **stack_a, t_stack **stack_b);
 void	target(t_stack **stack_a, t_stack **stack_b);
 void	print_stack_b(t_stack **stack);
-int		my_abs(int	num);
+int		my_abs(int num);
 void	cost(t_stack *stack_b, int size_a, int size_b);
 int		do_cost_effective(t_stack **stack_a, t_stack **stack_b);
+void	adjust_stack(t_stack **a, int len);
 #endif

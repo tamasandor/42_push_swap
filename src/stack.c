@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 01:10:49 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/22 00:27:50 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/22 19:28:14 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	create_stack(t_stack **head, char **data)
 	return (1);
 }
 
-void	print_stack(t_stack **stack)
+/* void	print_stack(t_stack **stack)
 {
 	t_stack	*temp;
 
@@ -66,22 +66,8 @@ void	print_stack(t_stack **stack)
 	printf("{");
 	while (temp)
 	{
-		printf(" |%d ca: %d cb: %d| ", temp->number, temp->cost_a, temp->cost_b);
+		printf(" |%d p: %d i: %d| ", temp->number, temp->pos, temp->index);
 		temp = temp->next;
 	}
 	printf("}\n");
-}
-
-void	print_stack_b(t_stack **stack)
-{
-	t_stack	*temp;
-
-	temp = *stack;
-	printf("{");
-	while (temp)
-	{
-		printf(" |%d T_POS: %d| ", temp->number, temp->target_pos);
-		temp = temp->next;
-	}
-	printf("}\n");
-}
+} */

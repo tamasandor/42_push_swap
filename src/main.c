@@ -6,14 +6,14 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 16:52:50 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/22 14:13:36 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/22 19:25:54 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 #include <unistd.h>
 
-void	assign_index(t_stack *stack_a, int len)
+static void	assign_index(t_stack *stack_a, int len)
 {
 	int		index;
 	t_stack	*lowest;
@@ -36,21 +36,21 @@ void	assign_index(t_stack *stack_a, int len)
 	}
 }
 
-int	is_sorted(t_stack *stack_a)
+static int	is_sorted(t_stack *stack_a)
 {
 	t_stack	*current;
 
 	current = stack_a;
 	while (current->next)
 	{
-		if (current->index > current->next->index)
+		if (current->number > current->next->number)
 			return (0);
 		current = current->next;
 	}
 	return (1);
 }
 
-void	sort_three(t_stack **stack_a)
+static void	sort_three(t_stack **stack_a)
 {
 	if ((*stack_a)->index > (*stack_a)->next->index
 		&& (*stack_a)->index > (*stack_a)->next->next->index)
@@ -61,7 +61,7 @@ void	sort_three(t_stack **stack_a)
 		swap_x(stack_a, "sa\n");
 }
 
-void	sort_more(t_stack **stack_a, t_stack **stack_b, int len)
+static void	sort_more(t_stack **stack_a, t_stack **stack_b, int len)
 {
 	t_stack	*temp_b;
 	int		len_b;
@@ -73,13 +73,16 @@ void	sort_more(t_stack **stack_a, t_stack **stack_b, int len)
 		len_b++;
 		push_to_x(stack_a, stack_b, "pb\n");
 	}
-	sort_three(stack_a);
+	if (!is_sorted(*stack_a))
+		sort_three(stack_a);
 	while (*stack_b)
 	{
 		target(stack_a, stack_b);
 		cost(*stack_b, len - len_b, len_b);
 		len_b -= do_cost_effective(stack_a, stack_b);
 	}
+	if (!is_sorted(*stack_a))
+		adjust_stack(stack_a, len);
 }
 
 int	main(int argc, char *argv[])
@@ -100,10 +103,6 @@ int	main(int argc, char *argv[])
 		sort_three(&stack_a);
 	else if (argc > 3 && !is_sorted(stack_a))
 		sort_more(&stack_a, &stack_b, argc);
-	write(1, "stack_a: ", 10);
-	print_stack(&stack_a);
-	write(1, "stack_b: ", 10);
-	print_stack_b(&stack_b);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 }

@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 23:00:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/22 14:15:28 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/22 19:27:26 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	current_pos(t_stack **stack_a, t_stack **stack_b)
 	}
 }
 
-int		get_lowest(t_stack *stack_a, int b_index, int target_index, int target_position)
+static int	get_lowest(t_stack *stack_a, int b_index, int target_index,
+					int target_position)
 {
 	t_stack	*temp_a;
 
@@ -63,18 +64,18 @@ int		get_lowest(t_stack *stack_a, int b_index, int target_index, int target_posi
 	return (target_position);
 }
 
-void	target(t_stack **stack_a, t_stack **stack_b)
+void	target(t_stack **a, t_stack **stack_b)
 {
 	t_stack	*temp_b;
-	int		target_position;
+	int		t_position;
 
-	current_pos(stack_a, stack_b);
-	target_position = -1;
+	current_pos(a, stack_b);
+	t_position = -1;
 	temp_b = *stack_b;
 	while (temp_b)
 	{
-		target_position = get_lowest(*stack_a, temp_b->index, INT_MAX, target_position);
-		temp_b->target_pos = target_position;
+		t_position = get_lowest(*a, temp_b->index, INT_MAX, t_position);
+		temp_b->target_pos = t_position;
 		temp_b = temp_b->next;
 	}
 }
