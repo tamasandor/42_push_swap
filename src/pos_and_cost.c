@@ -6,26 +6,19 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 23:00:34 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/24 23:08:48 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/25 19:06:17 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 #include <limits.h>
 
-void	current_pos(t_stack **stack_a, t_stack **stack_b)
+void	current_pos(t_stack **stack_a)
 {
 	t_stack	*current;
 	int		pos;
 
 	current = *stack_a;
-	pos = 0;
-	while (current)
-	{
-		current->pos = pos++;
-		current = current->next;
-	}
-	current = *stack_b;
 	pos = 0;
 	while (current)
 	{
@@ -64,14 +57,15 @@ static int	get_lowest(t_stack **stack_a, int b_index, int target_index,
 	return (target_position);
 }
 
-void	target(t_stack **a, t_stack **stack_b)
+void	target(t_stack **a, t_stack **b)
 {
 	t_stack	*temp_b;
 	int		t_position;
 
-	current_pos(a, stack_b);
+	current_pos(a);
+	current_pos(b);
 	t_position = -1;
-	temp_b = *stack_b;
+	temp_b = *b;
 	while (temp_b)
 	{
 		t_position = get_lowest(a, temp_b->index, INT_MAX, t_position);

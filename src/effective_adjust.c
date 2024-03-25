@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 23:01:03 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/22 19:24:07 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/25 19:01:53 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	adjust_stack(t_stack **a, int len)
 {
 	int	low_position;
 
-	current_pos(a, a);
+	current_pos(a);
 	low_position = lowest_pos(a);
 	if (low_position > len / 2)
 	{
@@ -113,9 +113,9 @@ int	do_cost_effective(t_stack **stack_a, t_stack **stack_b)
 	{
 		if (my_abs(temp->cost_a) + my_abs(temp->cost_b) < cheapest)
 		{
-			cheapest = my_abs(cost_a) + my_abs(cost_b);
 			cost_a = temp->cost_a;
 			cost_b = temp->cost_b;
+			cheapest = my_abs(cost_a) + my_abs(cost_b);
 		}
 		temp = temp->next;
 	}
