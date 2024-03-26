@@ -16,6 +16,7 @@ $(NAME): $(OBJ)
 $(CHECKER):
 	curl -o $(CHECKER) https://cdn.intra.42.fr/document/document/24664/checker_linux
 	chmod +x $(CHECKER)
+	sleep 0.5
 
 clean:
 	$(MAKE) -C ./include/libft clean
