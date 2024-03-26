@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:23:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/26 10:56:16 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/26 18:07:11 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,32 @@
 #include "../include/push_swap.h"
 #include "../include/libft/libft.h"
 
+static char	*trim_zero(char *string)
+{
+	if (*string == '+' || *string == '-')
+		string++;
+	while (*string == '0')
+	{
+		string++;
+	}
+	return (string);
+}
+
 static int	ft_same(char *s1, char *s2)
 {
-	if (*s1 == '+')
-		s1++;
-	while(*s1 == '0')
-		s1++;
-	if (*s2 == '+')
-		s2++;
-	while(*s2 == '0')
-		s2++;
+	int	s1minus;
+	int	s2minus;
+
+	s1minus = 0;
+	s2minus = 0;
+	if (*s1 == '-')
+		s1minus = 1;
+	s1 = trim_zero(s1);
+	if (*s2 == '-')
+		s2minus = 1;
+	s2 = trim_zero(s2);
+	if (s1minus != s2minus)
+		return (0);
 	while (*s1 != '\0' && *s2 != '\0')
 	{
 		if (*s1 != *s2)
@@ -39,17 +55,6 @@ static int	ft_same(char *s1, char *s2)
 	return (0);
 }
 
-static int	ft_multinull(char *str)
-{
-	if (*str == '0')
-	{
-		str++;
-		if (*str)
-			return (1);
-	}
-	return (0);
-}
-
 int	ft_atoi_check(char *str, int *error)
 {
 	int			minus;
@@ -57,7 +62,7 @@ int	ft_atoi_check(char *str, int *error)
 
 	res = 0;
 	minus = 1;
-	if (!str || !str[0] || ft_multinull(str))
+	if (!str || !str[0])
 		return (*error = 1, 0);
 	if (ft_same("-2147483648", str))
 		return (-2147483648);
