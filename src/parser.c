@@ -6,7 +6,7 @@
 /*   By: atamas <atamas@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:23:11 by atamas            #+#    #+#             */
-/*   Updated: 2024/03/26 18:07:11 by atamas           ###   ########.fr       */
+/*   Updated: 2024/03/30 22:57:28 by atamas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	ft_atoi_check(char *str, int *error)
 
 	res = 0;
 	minus = 1;
-	if (!str || !str[0])
+	if (!str || !str[0] || (str[0] == '+' && !str[1]))
 		return (*error = 1, 0);
 	if (ft_same("-2147483648", str))
 		return (-2147483648);
